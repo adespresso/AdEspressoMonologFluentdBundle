@@ -1,0 +1,21 @@
+{
+    "name": "adespresso/monolog-fluentd-bundle",
+    "description": "Symfony2 bundle to send logs to fluentd via monolog",
+    "license": "Apache-2.0",
+    "type": "symfony-bundle",
+    "authors": [
+        {
+            "name": "Riccardo Attilio Galli",
+            "email": "riccardo@adespresso.com"
+        }
+    ],
+    "require": {
+        "symfony/monolog-bundle": "~2.3",
+        "fluent/logger": "~0.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ae\\MonologFluentdBundle\\": ""
+        }
+    }
+}
