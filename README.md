@@ -55,3 +55,11 @@ You may load the handler as a service
 ## How to run the tests
 
     phpunit -c phpunit.xml.dist
+
+## Copyright
+
+© 2015 AdEspresso, Inc
+
+## License
+
+Apache 2.0 (see [LICENSE](/LICENSE) file or http://www.apache.org/licenses/LICENSE-2.0)
