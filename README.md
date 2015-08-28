@@ -2,6 +2,7 @@
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/adespresso/MonologFluentdBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/adespresso/MonologFluentdBundle/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/adespresso/MonologFluentdBundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/adespresso/MonologFluentdBundle/build-status/master)
+[![Code Coverage](https://scrutinizer-ci.com/g/adespresso/MonologFluentdBundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/adespresso/MonologFluentdBundle/?branch=master)
 
 This bundle enables logging to fluentd via monolog.
 
