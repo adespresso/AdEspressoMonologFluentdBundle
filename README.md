@@ -1,5 +1,8 @@
 # adespresso/monolog-fluentd-bundle
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/adespresso/MonologFluentdBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/adespresso/MonologFluentdBundle/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/adespresso/MonologFluentdBundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/adespresso/MonologFluentdBundle/build-status/master)
+
 This bundle enables logging to fluentd via monolog.
 
 Monolog sends your logs to files, sockets, inboxes, databases and various web services.
