@@ -32,6 +32,11 @@ class FluentdHandler extends AbstractProcessingHandler
     {
         parent::__construct($level, $bubble);
         $this->fluentLogger = $this->makeFluentLogger($host, $port, $options);
+
+        // By default FluentLogger would write to stderr for every message gone wrong.
+        // We find it a bad default (you would probably start to log miriad of data as error).
+        // You can reset the same or a different error handler by accessing the logger with getFluentLogger();
+        $this->fluentLogger->registerErrorHandler(function ($logger, $entity, $error) {});
     }
 
     /**
