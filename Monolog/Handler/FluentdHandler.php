@@ -12,7 +12,7 @@ class FluentdHandler extends AbstractProcessingHandler
     /**
      * @var FluentLogger
      */
-    private $fluentLogger;
+    protected $fluentLogger;
 
     /**
      * Initialize Handler.
@@ -32,6 +32,16 @@ class FluentdHandler extends AbstractProcessingHandler
     {
         parent::__construct($level, $bubble);
         $this->fluentLogger = $this->makeFluentLogger($host, $port, $options);
+    }
+
+    /**
+     * Get the internal FluentLogger instance.
+     *
+     * @return FluentLogger
+     */
+    public function getFluentLogger()
+    {
+        return $this->fluentLogger;
     }
 
     /**
