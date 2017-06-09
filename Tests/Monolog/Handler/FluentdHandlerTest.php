@@ -11,7 +11,6 @@ class FluentdHandlerTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->fluentLoggerMock = $this->getMockBuilder(FluentLogger::class)
-        ->disableOriginalConstructor()
         ->getMock();
     }
 
@@ -32,11 +31,11 @@ class FluentdHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testHandleBatchNotWritesToFluentdIfMessagesAreBelowLevel()
     {
-        $records = array(
+        $records = [
             $this->getRecord(Logger::DEBUG, 'debug message 1'),
             $this->getRecord(Logger::DEBUG, 'debug message 2'),
             $this->getRecord(Logger::INFO, 'information'),
-        );
+        ];
 
         $handler = $this->createHandlerInstance();
         $handler->setLevel(Logger::ERROR);
@@ -45,29 +44,6 @@ class FluentdHandlerTest extends \PHPUnit_Framework_TestCase
         ->method('post');
 
         $handler->handleBatch($records);
-    }
-
-    /**
-     * Create an instance with default args and `makeFluentLogger` mocked
-     */
-    private function createHandlerInstance()
-    {
-        $hostname = 'foo';
-        $port = 1234;
-        $options = ['bar' => 'baz'];
-
-        $fluentdHandlerMock = $this->getMockBuilder(FluentdHandler::class)
-        ->setMethods(array('makeFluentLogger'))
-        ->disableOriginalConstructor()
-        ->getMock();
-
-        $fluentdHandlerMock->expects($this->once())
-        ->method('makeFluentLogger')
-        ->willReturn($this->fluentLoggerMock);
-
-        $fluentdHandlerMock->__construct($hostname, $port, $options);
-
-        return $fluentdHandlerMock;
     }
 
     protected function getRecord($level = Logger::WARNING, $message = 'test', $context = [])
@@ -81,5 +57,28 @@ class FluentdHandlerTest extends \PHPUnit_Framework_TestCase
             'datetime' => \DateTime::createFromFormat('U.u', sprintf('%.6F', microtime(true))),
             'extra' => [],
         ];
+    }
+
+    /**
+     * Create an instance with default args and `makeFluentLogger` mocked.
+     */
+    private function createHandlerInstance()
+    {
+        $hostname = 'foo';
+        $port = 1234;
+        $options = ['bar' => 'baz'];
+
+        $fluentdHandlerMock = $this->getMockBuilder(FluentdHandler::class)
+        ->setMethods(['makeFluentLogger'])
+        ->disableOriginalConstructor()
+        ->getMock();
+
+        $fluentdHandlerMock->expects($this->once())
+        ->method('makeFluentLogger')
+        ->willReturn($this->fluentLoggerMock);
+
+        $fluentdHandlerMock->__construct($hostname, $port, $options);
+
+        return $fluentdHandlerMock;
     }
 }
