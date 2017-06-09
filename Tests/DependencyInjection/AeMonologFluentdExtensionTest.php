@@ -59,7 +59,7 @@ class AeMonologFluentdExtensionTest extends \PHPUnit_Framework_TestCase
 
     protected function getConfig()
     {
-        $yaml = <<<EOF
+        $yaml = <<<'EOF'
 ae_monolog_fluentd:
     host: localhost
     port: 24224

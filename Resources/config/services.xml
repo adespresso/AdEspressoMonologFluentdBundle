@@ -10,10 +10,11 @@
 
     <services>
         <service id="ae_monolog_fluentd.monolog.handler" class="%ae_monolog_fluentd.monolog_handler.class%">
+            <argument>%ae_monolog_fluentd.level%</argument>
+            <argument>true</argument>
             <argument>%ae_monolog_fluentd.host%</argument>
             <argument>%ae_monolog_fluentd.port%</argument>
             <argument>%ae_monolog_fluentd.options%</argument>
-            <argument>%ae_monolog_fluentd.level%</argument>
         </service>
     </services>
 

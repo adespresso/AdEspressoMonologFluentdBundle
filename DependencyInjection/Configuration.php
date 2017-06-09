@@ -2,15 +2,17 @@
 
 namespace Ae\MonologFluentdBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Builder\TreeBuilder;
-use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Fluent\Logger\FluentLogger;
 use Monolog\Logger;
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class Configuration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}
+     *
+     * @throws \RuntimeException
      */
     public function getConfigTreeBuilder()
     {
@@ -26,7 +28,7 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue(FluentLogger::DEFAULT_LISTEN_PORT)
                 ->end()
                 ->variableNode('options')
-                    ->defaultValue(array())
+                    ->defaultValue([])
                 ->end()
                 ->scalarNode('level')
                     ->defaultValue(Logger::DEBUG)

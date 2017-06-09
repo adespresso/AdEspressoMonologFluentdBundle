@@ -22,19 +22,21 @@ class FluentdHandler extends AbstractProcessingHandler
      * @param array  $options FluentLogger options
      * @param int    $level   The minimum logging level at which this handler will be triggered
      * @param bool   $bubble  Whether the messages that are handled can bubble up the stack or not
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(
+        $level = Logger::DEBUG,
+        $bubble = true,
         $host = FluentLogger::DEFAULT_ADDRESS,
         $port = FluentLogger::DEFAULT_LISTEN_PORT,
-        $options = array(),
-        $level = Logger::DEBUG,
-        $bubble = true)
-    {
+        $options = []
+    ) {
         parent::__construct($level, $bubble);
         $this->fluentLogger = $this->makeFluentLogger($host, $port, $options);
 
         // By default FluentLogger would write to stderr for every message gone wrong.
-        // We find it a bad default (you would probably start to log miriad of data as error).
+        // We find it a bad default (you would probably start to log myriad of data as error).
         // You can reset the same or a different error handler by accessing the logger with getFluentLogger();
         $this->fluentLogger->registerErrorHandler(function ($logger, $entity, $error) {});
     }
@@ -50,13 +52,23 @@ class FluentdHandler extends AbstractProcessingHandler
     }
 
     /**
-     * Create a new instande of FluentLogger.
+     * {@inheritdoc}
+     */
+    public function close()
+    {
+        $this->fluentLogger->close();
+    }
+
+    /**
+     * Create a new instance of FluentLogger.
      *
      * @param string $host
      * @param int    $port
      * @param array  $options FluentLogger options
+     *
+     * @return FluentLogger
      */
-    protected function makeFluentLogger($host, $port, $options = array())
+    protected function makeFluentLogger($host, $port, array $options = [])
     {
         return new FluentLogger($host, $port, $options);
     }
@@ -76,17 +88,9 @@ class FluentdHandler extends AbstractProcessingHandler
      *
      * @return string the tag
      */
-    protected function formatTag($record)
+    protected function formatTag(array $record)
     {
         return sprintf('%s.%s', $record['channel'], $record['message']);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function close()
-    {
-        $this->fluentLogger->close();
     }
 
     /**
